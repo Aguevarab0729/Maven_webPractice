@@ -1,5 +1,6 @@
 package com.globant.pages;
 
+import com.globant.base.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,12 +19,19 @@ public class LoginPage extends BasePage {
         super(driver);
     }
     public void login(String username, String password) {
-        waitAndSendKeys(userNameInput, username);
-        waitAndSendKeys(passwordInput, password);
-        waitAndClick(loginButton);
+        userNameInput.sendKeys(username);
+        passwordInput.sendKeys(password);
+        loginButton.click();
+    }
+    public boolean isLoginButtonEnabled() {
+        return loginButton.isEnabled();
     }
 
     public boolean isLoginPageDisplayed() {
-        return isElementPresent(loginButton);
+        try {
+            return userNameInput.isDisplayed() && passwordInput.isDisplayed() && loginButton.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

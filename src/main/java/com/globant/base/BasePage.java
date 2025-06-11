@@ -1,4 +1,4 @@
-package com.globant.pages;
+package com.globant.base;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,7 +17,7 @@ public class BasePage {
     }
 
     protected void waitAndClick(WebElement element) {
-        wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(text);
+        wait.until(ExpectedConditions.visibilityOf(element)).click();
     }
 
     protected void waitAndSendKeys(WebElement element, String text) {

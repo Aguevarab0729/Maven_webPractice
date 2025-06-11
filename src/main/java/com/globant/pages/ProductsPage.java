@@ -1,5 +1,6 @@
 package com.globant.pages;
 
+import com.globant.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,29 +9,29 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 import java.util.Random;
 
-public class ProductsPage extends BasePage{
-    @FindBy(className = "inventory_item")
-    private List<WebElement> productItems;
+public class ProductsPage extends BasePage {
+    @FindBy(className = "inventoryItem")
+    private List<WebElement> products;
 
-    @FindBy(className = "shopping_cart_link")
+    @FindBy(className = "shoppingCart")
     private WebElement cartIcon;
 
-    @FindBy(id = "react-burger-menu-btn")
+    @FindBy(id = "reactBurgerMenu")
     private WebElement menuButton;
 
-    @FindBy(id = "logout_sidebar_link")
+    @FindBy(id = "logoutSidebarLink")
     private WebElement logoutLink;
 
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
 
-    public void addRandomProductToCart() {
+    public void addProductToCart() {
         Random random = new Random();
-        int randomIndex = random.nextInt(productItems.size());
-        WebElement randomProduct = productItems.get(randomIndex);
+        int randomIndex = random.nextInt(products.size());
+        WebElement randomProduct = products.get(randomIndex);
 
-        // Buscar el botón "Add to cart" dentro del producto específico
+        // Buscar el botón dentro del producto
         WebElement addToCartButton = randomProduct.findElement(
                 By.xpath(".//button[contains(text(), 'Add to cart')]")
         );
@@ -38,7 +39,7 @@ public class ProductsPage extends BasePage{
     }
 
     public void addSpecificProductToCart(String productName) {
-        for (WebElement product : productItems) {
+        for (WebElement product : products) {
             String actualProductName = product.findElement(
                     By.className("inventory_item_name")
             ).getText();
@@ -77,5 +78,16 @@ public class ProductsPage extends BasePage{
                 "Sauce Labs Fleece Jacket",
                 "Test.allTheThings() T-Shirt (Red)"
         };
+    }
+
+    public List<WebElement> getProducts() {
+        return products;
+    }
+
+    public void addRandomProductToCart() {
+        if (products.isEmpty()) {
+            throw new IllegalStateException("No products available to add to cart.");
+        }
+        addProductToCart();
     }
 }

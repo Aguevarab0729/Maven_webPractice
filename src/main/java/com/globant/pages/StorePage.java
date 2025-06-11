@@ -1,5 +1,6 @@
 package com.globant.pages;
 
+import com.globant.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +18,9 @@ public class StorePage extends BasePage {
     @FindBy(id = "checkout")
     private WebElement checkoutButton;
 
+    @FindBy(className = "removedStoreItem")
+    private List<WebElement> removedStoreItems;
+
     public StorePage(WebDriver driver, List<WebElement> storeItems) {
         super(driver);
         this.storeItems = storeItems;
@@ -32,7 +36,7 @@ public class StorePage extends BasePage {
         return storeItems.size();
     }
 
-    public void proceedToCheckout() {
+    public static void proceedToCheckout() {
         waitAndClick(checkoutButton);
     }
 

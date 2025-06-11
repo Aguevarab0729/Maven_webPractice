@@ -1,1 +1,5 @@
+com\globant\pages\StorePage.class
 com\globant\App.class
+com\globant\pages\BasePage.class
+com\globant\pages\LoginPage.class
+com\globant\pages\ProductsPage.class
